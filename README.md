@@ -1,5 +1,6 @@
 # 项目结构
 
+```
 .
 ├── browser-template
 │   ├── index.html
@@ -59,3 +60,4 @@
     ├── tsconfig.json
     ├── tsconfig.node.json
     └── vite.config.ts
+```
