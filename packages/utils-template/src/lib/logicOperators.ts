@@ -95,3 +95,27 @@ export function division(arg1: string | number, arg2: string | number) {
     return NaN
   }
 }
+
+/**
+ * 取余数
+ * @param arg1
+ * @param arg2
+ * @returns
+ */
+export function remainder(arg1: string | number, arg2: string | number) {
+  try {
+    const arg1Fractional = String(arg1).split('.')[1]
+    const arg2Fractional = String(arg2).split('.')[1]
+    const arg1Length = (arg1Fractional && arg1Fractional.length) || 0
+    const arg2Length = (arg2Fractional && arg2Fractional.length) || 0
+    const expandedMultiplier = Math.pow(10, Math.max(arg1Length, arg2Length))
+
+    return (
+      (multiply(arg1, expandedMultiplier) %
+        multiply(arg2, expandedMultiplier)) /
+      expandedMultiplier
+    )
+  } catch (e) {
+    return NaN
+  }
+}

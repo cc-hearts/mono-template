@@ -1,7 +1,9 @@
-export default {
+module.exports = {
   env: {
     browser: true,
     es2021: true,
+    node: true,
+    jest: true,
   },
   extends: [
     'eslint:recommended',
@@ -15,5 +17,7 @@ export default {
     ecmaVersion: 'latest',
   },
   plugins: ['@typescript-eslint'],
-  rules: {},
+  rules: {
+    '@typescript-eslint/no-var-requires': 0,
+  },
 }
