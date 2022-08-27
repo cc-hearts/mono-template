@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "pnpm jest",
-    "prepare": "husky install"
+    "web": "pnpm --filter @repo/browser-template dev",
+    "prepare": "husky install",
+    "vue2": "pnpm --filter @repo/vue2-template dev"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "jest": "^28.1.3",
     "typescript": "^4.7.4"

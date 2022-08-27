@@ -30,6 +30,7 @@ export function digitalAmountSplit2(arg: string | number): string {
   // 第一个匹配到的match是replace需要替换的字符
   return String(arg).replace(reg, function (match, p1, offset, string) {
     console.log(match, p1, offset, string)
+    // eslint-disable-next-line prefer-rest-params
     console.log(arguments)
     return ','
   })

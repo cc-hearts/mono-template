@@ -12,11 +12,9 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
   ],
-  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
   },
-  plugins: ['@typescript-eslint'],
   rules: {
     '@typescript-eslint/no-var-requires': 0,
   },

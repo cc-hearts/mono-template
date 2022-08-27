@@ -1,0 +1,33 @@
+.g-wrap {
+  position: relative;
+  margin: auto;
+  width: 400px;
+  height: 200px;
+  border: 1px solid #000;
+  padding: 10px;
+  line-height: 1.5;
+  word-break: break-all;
+}
+.g-wrap span:not(.content) {
+  background: linear-gradient(#000, #000 1px, transparent 1px);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+}
+.g-wrap .under-line {
+  color: transparent;
+  text-align: left !important;
+}
+
+.content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: none;
+  padding: 10px 10px 0 10px;
+}
+
+
+.text-underline {
+  text-decoration: underline;
+}
