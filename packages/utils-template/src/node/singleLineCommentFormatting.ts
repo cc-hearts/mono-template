@@ -20,7 +20,7 @@ function getMaxLength(text: string) {
 }
 
 // 编码格式
-function changeTabs(text:string, length: number) {
+function changeTabs(text: string, length: number) {
   const reg = /(.*?)(\s)*\/\//
   const notice = /(\/\/.*)$/
   const array = text.split('\n')
@@ -74,6 +74,5 @@ function formatTextNotice(path: string, fileName: string, maxLength = 10) {
 module.exports = {
   formatTextNotice,
 }
-
 
 export {}

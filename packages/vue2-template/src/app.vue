@@ -1,11 +1,11 @@
 <template>
   <div>
-    {{ count }}
-    <button @click="handleClick">click add</button>
+    <Home :count="count" @add="handleClick" />
   </div>
 </template>
 
 <script>
+import Home from './pages/home/home.vue'
 export default {
   name: 'App',
   data() {
@@ -13,9 +13,12 @@ export default {
       count: 0,
     }
   },
+  components: {
+    Home,
+  },
   methods: {
     handleClick() {
-      this.count++
+      this.count += 1
     },
   },
 }
