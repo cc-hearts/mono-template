@@ -27,7 +27,7 @@ export const isValidJSON = (string: string): boolean => {
   }
 }
 
-function prototypeToString(param: unknown) {
+export function prototypeToString(param: unknown) {
   return Object.prototype.toString.call(param)
 }
 
@@ -36,3 +36,7 @@ export const isObject = (param: unknown) =>
 
 export const isNull = (param: unknown) =>
   prototypeToString(param) === '[object Null]'
+
+export const isValidNumber = (param: number) => {
+  return prototypeToString(param) === '[object Number]' && !isNaN(param)
+}

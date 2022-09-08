@@ -1,3 +1,5 @@
+import { prototypeToString } from './bool'
+
 /**
  * noop
  */
@@ -8,23 +10,48 @@ export const noop = () => {
 export function clearObjectValue(
   obj: Record<string, unknown>
 ): Record<string, unknown> {
-  const tempObj = Object.assign({}, obj)
-  Object.keys(tempObj).forEach((key: keyof typeof obj) => {
-    switch (typeof tempObj[key]) {
-      case 'string': {
-        tempObj[key] = ''
+  const values = Object.assign({}, obj)
+  Object.keys(values).forEach((key: keyof typeof obj) => {
+    switch (prototypeToString(values[key])) {
+      case '[object String]': {
+        values[key] = ''
         break
       }
-      case 'number': {
-        tempObj[key] = 0
+      case '[object Number]': {
+        values[key] = 0
         break
       }
-      case 'boolean': {
-        tempObj[key] = false
+      case '[object Boolean]': {
+        values[key] = false
+        break
+      }
+      case '[object Promise]': {
+        // TODO：
+        break
+      }
+      case '[object Set]': {
+        Reflect.apply((values[key] as Set<unknown>).clear, null, [])
+        break
+      }
+      case '[object Map]': {
+        Reflect.apply(
+          (values[key] as Map<PropertyKey, unknown>).clear,
+          null,
+          []
+        )
+        break
+      }
+      case '[object BigInt]': {
+        values[key] = 0n
+        break
+      }
+      case '[object Array]': {
+        ;(values[key] as unknown[]).length = 0
+        break
       }
     }
   })
-  return tempObj
+  return values
 }
 
 module.exports = {
