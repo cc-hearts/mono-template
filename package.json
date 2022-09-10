@@ -7,7 +7,9 @@
     "test": "pnpm jest",
     "web": "pnpm --filter @repo/browser-template dev",
     "prepare": "husky install",
-    "vue2": "pnpm --filter @repo/vue2-template dev"
+    "vue2": "pnpm --filter @repo/vue2-template dev",
+    "vue3": "pnpm --filter @repo/vue3-template dev",
+    "react": "pnpm --filter @repo/react-template dev"
   },
   "keywords": [],
   "author": "",

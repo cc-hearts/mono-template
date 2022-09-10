@@ -61,3 +61,9 @@
     ├── tsconfig.node.json
     └── vite.config.ts
 ```
+
+## 先安装 vue2 的依赖
+
+```shell
+pnpm -filter @repo/vue2-template install
+```

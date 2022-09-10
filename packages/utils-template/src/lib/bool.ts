@@ -40,3 +40,8 @@ export const isNull = (param: unknown) =>
 export const isValidNumber = (param: number) => {
   return prototypeToString(param) === '[object Number]' && !isNaN(param)
 }
+
+export const isEmptyObject = (param: Record<PropertyKey, unknown>) => {
+  //  判断相等还可以使用 pram.constructor === Object 这样判断
+  return Reflect.ownKeys(param).length === 0 && isObject(param)
+}
