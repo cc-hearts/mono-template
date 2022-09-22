@@ -5,7 +5,6 @@
  */
 
 /**
- * 返回选中的内容
- *
+ * @description 返回选中的内容
  */
 export const getSelectedText = () => window.getSelection()?.toString()

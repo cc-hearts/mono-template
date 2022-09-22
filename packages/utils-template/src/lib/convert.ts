@@ -9,9 +9,7 @@
  * @param {Object | undefined} obj
  * @returns {String | null}
  */
-export function objectConvertParams(
-  obj: Record<string, unknown> | undefined
-): string | null {
+export function objectConvertParams(obj: Record<string, unknown> | undefined): string | null {
   if (typeof obj === 'object') {
     let params = ''
     let flag = true
@@ -31,12 +29,7 @@ export function objectConvertParams(
  */
 export function getParams(httpUrl: string): Record<string, unknown> | null {
   try {
-    return JSON.parse(
-      `{"${decodeURI(httpUrl.split('?')[1])
-        .replace(/"/, '\\"')
-        .replace(/=/g, '":"')
-        .replace(/&/g, '","')}"}`
-    )
+    return JSON.parse(`{"${decodeURI(httpUrl.split('?')[1]).replace(/"/, '\\"').replace(/=/g, '":"').replace(/&/g, '","')}"}`)
   } catch (e) {
     console.error(e)
     return null
@@ -48,8 +41,7 @@ export function getParams(httpUrl: string): Record<string, unknown> | null {
  * @param {String} fahrenheit 华氏温度
  * @returns {String}
  */
-export const fahrenheitToCelsius = (fahrenheit: number) =>
-  ((fahrenheit - 32) * 5) / 9
+export const fahrenheitToCelsius = (fahrenheit: number) => ((fahrenheit - 32) * 5) / 9
 
 /**
  * 将摄氏温度转华氏温度
