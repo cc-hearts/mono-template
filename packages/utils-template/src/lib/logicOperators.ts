@@ -3,48 +3,46 @@
  * @description 逻辑运算
  * @Date 2022-08-12
  */
+function getDecimal(val: string | number) {
+  const arg = String(val)
+  const length = arg.split(',')[1]?.length || 0
+  return [arg, length] as const
+}
 
+function removeDecimal(val: string): number {
+  return Number(val.replace('.', ''))
+}
 /**
  * 乘法
- * @param {*} arg1
- * @param {*} arg2
- * @returns
+ * @param {String | Number} arg1
+ * @param {String | Number} arg2
+ * @returns { Number }
  */
-export function multiply(arg1: number | string, arg2: number | string) {
-  let m = 0
+export function multiply(arg1: number | string, arg2: number | string): number {
   try {
-    const arg1Fractional = String(arg1).split('.')[1]
-    const arg2Fractional = String(arg2).split('.')[1]
-    m += (arg1Fractional && arg1Fractional.length) || 0
-    m += (arg2Fractional && arg2Fractional.length) || 0
+    let m = 0
+    const [arg1Fractional, arg1Length] = getDecimal(arg1)
+    const [arg2Fractional, arg2Length] = getDecimal(arg2)
+    m += arg1Length
+    m += arg2Length
+    return (removeDecimal(arg1Fractional) * removeDecimal(arg2Fractional)) / Math.pow(10, m)
   } catch (e) {
     return NaN
   }
-  return (
-    (Number(String(arg1).replace('.', '')) *
-      Number(String(arg2).replace('.', ''))) /
-    Math.pow(10, m)
-  )
 }
 
 /**
  * 加法
- * @param {*} arg1
- * @param {*} arg2
- * @returns
+ * @param {String | Number} arg1
+ * @param {String | Number} arg2
+ * @returns { Number }
  */
-export function addition(arg1: string | number, arg2: string | number) {
+export function addition(arg1: string | number, arg2: string | number): number {
   try {
-    const arg1Fractional = String(arg1).split('.')[1]
-    const arg2Fractional = String(arg2).split('.')[1]
-    const arg1Length = (arg1Fractional && arg1Fractional.length) || 0
-    const arg2Length = (arg2Fractional && arg2Fractional.length) || 0
+    const [arg1Fractional, arg1Length] = getDecimal(arg1)
+    const [arg2Fractional, arg2Length] = getDecimal(arg2)
     const expandedMultiplier = Math.pow(10, Math.max(arg1Length, arg2Length))
-    return (
-      (multiply(arg1, expandedMultiplier) +
-        multiply(arg2, expandedMultiplier)) /
-      expandedMultiplier
-    )
+    return (multiply(arg1Fractional, expandedMultiplier) + multiply(arg2Fractional, expandedMultiplier)) / expandedMultiplier
   } catch (e) {
     return NaN
   }
@@ -52,22 +50,16 @@ export function addition(arg1: string | number, arg2: string | number) {
 
 /**
  * 减法
- * @param arg1
- * @param arg2
- * @returns
+ * @param {String | Number} arg1
+ * @param {String | Number} arg2
+ * @returns { Number }
  */
-export function subtraction(arg1: string | number, arg2: string | number) {
+export function subtraction(arg1: string | number, arg2: string | number): number {
   try {
-    const arg1Fractional = String(arg1).split('.')[1]
-    const arg2Fractional = String(arg2).split('.')[1]
-    const arg1Length = (arg1Fractional && arg1Fractional.length) || 0
-    const arg2Length = (arg2Fractional && arg2Fractional.length) || 0
+    const [arg1Fractional, arg1Length] = getDecimal(arg1)
+    const [arg2Fractional, arg2Length] = getDecimal(arg2)
     const expandedMultiplier = Math.pow(10, Math.max(arg1Length, arg2Length))
-    return (
-      (multiply(arg1, expandedMultiplier) -
-        multiply(arg2, expandedMultiplier)) /
-      expandedMultiplier
-    )
+    return (multiply(arg1Fractional, expandedMultiplier) - multiply(arg2Fractional, expandedMultiplier)) / expandedMultiplier
   } catch (e) {
     return NaN
   }
@@ -75,22 +67,16 @@ export function subtraction(arg1: string | number, arg2: string | number) {
 
 /**
  * 除法
- * @param arg1
- * @param arg2
- * @returns
+ * @param {String | Number} arg1
+ * @param {String | Number} arg2
+ * @returns { Number }
  */
-export function division(arg1: string | number, arg2: string | number) {
+export function division(arg1: string | number, arg2: string | number): number {
   try {
-    const arg1Fractional = String(arg1).split('.')[1]
-    const arg2Fractional = String(arg2).split('.')[1]
-    const arg1Length = (arg1Fractional && arg1Fractional.length) || 0
-    const arg2Length = (arg2Fractional && arg2Fractional.length) || 0
+    const [arg1Fractional, arg1Length] = getDecimal(arg1)
+    const [arg2Fractional, arg2Length] = getDecimal(arg2)
     const differenceMultiple = Math.pow(10, arg2Length - arg1Length)
-    return multiply(
-      Number(String(arg1).replace('.', '')) /
-        Number(String(arg2).replace('.', '')),
-      differenceMultiple
-    )
+    return multiply(removeDecimal(arg1Fractional) / removeDecimal(arg2Fractional), differenceMultiple)
   } catch (e) {
     return NaN
   }
@@ -98,23 +84,17 @@ export function division(arg1: string | number, arg2: string | number) {
 
 /**
  * 取余数
- * @param arg1
- * @param arg2
- * @returns
+ * @param {String | Number} arg1
+ * @param {String | Number} arg2
+ * @returns { Number }
  */
-export function remainder(arg1: string | number, arg2: string | number) {
+export function remainder(arg1: string | number, arg2: string | number): number {
   try {
-    const arg1Fractional = String(arg1).split('.')[1]
-    const arg2Fractional = String(arg2).split('.')[1]
-    const arg1Length = (arg1Fractional && arg1Fractional.length) || 0
-    const arg2Length = (arg2Fractional && arg2Fractional.length) || 0
+    const [arg1Fractional, arg1Length] = getDecimal(arg1)
+    const [arg2Fractional, arg2Length] = getDecimal(arg2)
     const expandedMultiplier = Math.pow(10, Math.max(arg1Length, arg2Length))
 
-    return (
-      (multiply(arg1, expandedMultiplier) %
-        multiply(arg2, expandedMultiplier)) /
-      expandedMultiplier
-    )
+    return (multiply(arg1Fractional, expandedMultiplier) % multiply(arg2Fractional, expandedMultiplier)) / expandedMultiplier
   } catch (e) {
     return NaN
   }
