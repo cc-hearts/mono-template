@@ -5,7 +5,7 @@
  */
 function getDecimal(val: string | number) {
   const arg = String(val)
-  const length = arg.split(',')[1]?.length || 0
+  const length = arg.split('.')[1]?.length || 0
   return [arg, length] as const
 }
 
@@ -93,7 +93,6 @@ export function remainder(arg1: string | number, arg2: string | number): number 
     const [arg1Fractional, arg1Length] = getDecimal(arg1)
     const [arg2Fractional, arg2Length] = getDecimal(arg2)
     const expandedMultiplier = Math.pow(10, Math.max(arg1Length, arg2Length))
-
     return (multiply(arg1Fractional, expandedMultiplier) % multiply(arg2Fractional, expandedMultiplier)) / expandedMultiplier
   } catch (e) {
     return NaN
